@@ -2,9 +2,11 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://proapi.azurewebsites.net",
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+    "@reduxjs/toolkit": "^1.8.1",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -13,6 +15,8 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "antd": "^4.20.0",
+    "axios": "^0.27.1",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
     "babel-plugin-named-asset-import": "^0.3.8",
@@ -45,6 +49,7 @@
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.0.0",
+    "react-redux": "^8.0.1",
     "react-refresh": "^0.11.0",
     "react-router-dom": "^6.3.0",
     "resolve": "^1.20.0",
@@ -153,6 +158,7 @@
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "lint-staged": "^12.3.8",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "redux-devtools": "^3.7.0"
   }
 }

@@ -22,7 +22,7 @@ module.exports = {
   // 一个配置文件可以被基础配置中的已启用的规则继承。
   extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   // 在配置文件里配置插件时，可以使用 plugins 关键字来存放插件名字的列表。插件名称可以省略 eslint-plugin- 前缀。
-  plugins: ['eslint-plugin-react'],
+  plugins: ['react'],
   rules: {
     'prettier/prettier': 'off',
     // 0:"off", 1:"warn", 2:"error"
@@ -45,6 +45,8 @@ module.exports = {
     'no-shadow': 0,
     '@typescript-eslint/no-shadow': 2,
     '@typescript-eslint/no-var-requires': 0,
+    // 允许使用any
+    "@typescript-eslint/no-explicit-any": ["off"],
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
@@ -99,7 +101,7 @@ module.exports = {
     //  对于三元运算符 ? 和 : 与他们所负责的代码处于同一行
     'operator-linebreak': [1, 'after'],
     // 每个var 关键字单独声明一个变量
-    'one-var': 1,
+    // 'one-var': 0,
     // 条件语句中赋值语句使用括号包起来
     'no-cond-assign': 1,
     // 单行代码块两边加空格
@@ -249,7 +251,9 @@ module.exports = {
     // 圆括号间不留空格。
     'space-in-parens': 1,
     // no console
-    'no-console': 0
+    'no-console': 0,
+    // 强制在花括号中使用一致的空格
+    "object-curly-spacing": ["error", "always"]
     //禁止嵌套3目运算
     // "no-nested-ternary": 2,
     // 注释首尾留空格。
