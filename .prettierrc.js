@@ -1,7 +1,7 @@
 //此处的规则供参考，其中多半其实都是默认值，可以根据个人习惯改写
 module.exports = {
   // 一行代码的最大字符数，默认是80(printWidth: <int>)
-  printWidth: 150,
+  printWidth: 80,
   // tab宽度为2空格(tabWidth: <int>)
   tabWidth: 2,
   // 是否使用tab来缩进，我们使用空格(useTabs: <bool>)

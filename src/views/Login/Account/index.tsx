@@ -4,7 +4,7 @@ import { Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 function LoginAccount(prop:any){
-   const usernameValidator = (_:any, value:any) => {
+  const usernameValidator = (_:any, value:any) => {
     if (!value){
        return Promise.reject('请输入账号！');
     } else {
@@ -23,6 +23,7 @@ function LoginAccount(prop:any){
           prefix={<UserOutlined />}
           size="large"
           placeholder='账号：admin or user'
+          defaultValue="admin"
         />
       </Form.Item>
 
@@ -36,6 +37,7 @@ function LoginAccount(prop:any){
           size="large" 
           placeholder='密码：ant.design'
           onPressEnter={onPressEnter}
+          defaultValue="ant.design"
         />
       </Form.Item>
     </>

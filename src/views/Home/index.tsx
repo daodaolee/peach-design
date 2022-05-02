@@ -10,6 +10,15 @@ import './index.less'
 
 
 type MenuItem = Required<MenuProps>['items'][number];
+type MenuParams = {
+  children: MenuParams[];
+  label: boolean | React.ReactChild | React.ReactFragment | null | undefined;
+  key: React.Key; icon: string;
+}
+type BreadcrumbParams = {
+  label: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
+}
+
 
 const { Header, Content, Footer, Sider } = Layout,
  getItem = (
@@ -28,11 +37,11 @@ const { Header, Content, Footer, Sider } = Layout,
   },
 
   // 渲染菜单
-  renderMenu = (data, params = []) => {
+  renderMenu = (data: any[], params = []) => {
     const result = []
-    data.map(item => {
+    data.map((item:MenuParams) => {
       if (item.children && item.children.length){
-        renderMenu(item.children, result) as never
+        renderMenu(item.children, result)
         params.push(getItem(item.label, item.key, item.icon ? AntdIcon(item.icon) : null, result) as never)
       } else {
         params.push(getItem(item.label, item.key, item.icon ? AntdIcon(item.icon) : null) as never)
@@ -46,12 +55,12 @@ function Home () {
   const [collapsed, setCollapsed] = useState(false),
   [selectedKeys, setSelectedKeys] = useState(['']),
   [openKeys, setOpenKeys] = useState(['']),
-  toggleCollapsed = value => setCollapsed(value),
+  toggleCollapsed = (value: boolean) => setCollapsed(value),
   menuData = useSelector(getMenu),
   navigate = useNavigate(),
   location = useLocation(),
   // 菜单点击跳转
-   handleMenuClick = data => {
+   handleMenuClick = (data: { key: string; }) => {
     const result = deepFindByOnce(menuData, 'key', data.key)
     navigate(result.path)
     setSelectedKeys(result.key)
@@ -59,12 +68,13 @@ function Home () {
   // 加载面包屑
   renderBreadcrumb = () => {
     const result = deepFindByChain(menuData, 'path', location.pathname)
-    return result.map((item, index) => item && <Breadcrumb.Item key={index}>{item.label}</Breadcrumb.Item>)
+    return result && result.map((item:BreadcrumbParams, index: React.Key) => 
+      item && <Breadcrumb.Item key={index}>{item.label}</Breadcrumb.Item>)
   },
   // 菜单切换，高亮
-  handleOpenChange = keys => {
-    const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
-    const rootSubmenuKeys = menuData.map(item => item.key)
+  handleOpenChange = (keys: string[]) => {
+    const latestOpenKey = keys.find((key: string) => openKeys.indexOf(key) === -1);
+    const rootSubmenuKeys = menuData.map((item: { key: string }) => item.key)
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       setOpenKeys(keys);
     } else {
@@ -74,13 +84,11 @@ function Home () {
   useEffect(() => {
     // 刷新页面，菜单高亮
     const result = deepFindByChain(menuData, 'path', location.pathname)
-    if (result.length > 1){
-      setSelectedKeys([result[result.length - 1].key])
-      setOpenKeys(result.map(item => item.key))
-    } else {
-      setSelectedKeys([result[result.length - 1].key])
-      setOpenKeys([])
+    if (!result){
+      return
     }
+    setSelectedKeys([result[result.length - 1].key])
+    setOpenKeys(result.length > 1 ? result.map((item: { key: string }) => item.key) : [])
   }, [])
  
 
@@ -115,7 +123,7 @@ function Home () {
             <Outlet />
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' }}>Peach Design ©2022 Created by DaoDaoLee</Footer>
       </Layout>
     </Layout>
   )

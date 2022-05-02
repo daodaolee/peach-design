@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { useRoutes, RouteObject } from 'react-router-dom'
+import { useRoutes, RouteObject, Navigate } from 'react-router-dom'
 
 import Home from '@/views/Home'
 import Login from '@/views/Login'
@@ -10,9 +10,12 @@ const routes:RouteObject[] = [{
   path: '/',
   element: <Home />,
   children: [{
+    path: '',
+    element: <Navigate to='list'/>
+  }, {
     path: 'list',
     element: <List />
-  },{
+  }, {
     path: 'other',
     element: <Other />
   }]

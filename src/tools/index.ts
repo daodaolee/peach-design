@@ -1,7 +1,6 @@
 // 递归查询返回单个
-export const deepFindByOnce = (array, key, target) => {
-  for (const x in array){
-    const item = array[x]
+export const deepFindByOnce = (array: any, key: string, target: string) => {
+  for (const item of array){
     if (item[key] === target){
       return item
     } else {
@@ -15,9 +14,8 @@ export const deepFindByOnce = (array, key, target) => {
   }
 }
 // 递归查询返回整链
-export const deepFindByChain = (array, key, target) => {
-  for (const i in array){
-    const item = array[i]
+export const deepFindByChain = (array: any, key: string, target: string) => {
+  for (const item of array){
     if (item[key] === target){
       return [item]
     }

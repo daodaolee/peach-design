@@ -7,13 +7,17 @@ import Phone from './Phone'
 import { login } from '@/axios'
 import { useNavigate } from 'react-router-dom';
 
-interface IParams {
+type LoginParams ={
   autoLogin: boolean;
   type: string;
   username?: string;
   password?: string;
   mobile?: string;
   captcha?: string;
+}
+type TabParams = {
+  name: string;
+  key: string | number;
 }
 
 function Login(){
@@ -32,8 +36,8 @@ function Login(){
   }],
   [form] = Form.useForm(),
   
-  onFinish = async (values: IParams) => {
-    const params:IParams = {
+  onFinish = async (values: LoginParams) => {
+    const params:LoginParams = {
       autoLogin: true,
       type: tabKey === '1' ? 'account' : 'mobile'
     }
@@ -75,7 +79,7 @@ function Login(){
         <div className='login-container'>
           <Tabs activeKey={tabKey} onChange={callback}>
             {
-              tabData.map(item => 
+              tabData.map((item:TabParams) => 
                 <TabPane tab={item.name} key={item.key} />
               )
             }
@@ -92,8 +96,8 @@ function Login(){
               <Button
                 size='large'
                 className='w100'
-                type="primary" 
-                htmlType="submit"
+                type='primary'
+                htmlType='submit'
                 loading={btnLoading}
               >
                 登录
